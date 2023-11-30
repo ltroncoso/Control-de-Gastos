@@ -1,0 +1,46 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listado Relaciones</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <section th:fragment="listadoRelaciones">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div>
+                                <h4>[[#{usuarios.tituloRelaciones}]]</h4>
+                            </div>
+                            <div>
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>[[#{usuarios.id}]]</th>
+                                            <th>[[#{usuarios.usuario}]]</th>
+                                            <th>[[#{usuarios.rol}]]</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="usuarioRol: ${usuarioRol}">
+                                            <td th:text="${usuarioRol.idUsuarioRol}">Mostar id Relacion </td>
+                                            <td th:text="${usuarioRol.usuario.username}">Mostar usuario</td>
+                                            <td th:text="${usuarioRol.rol.rol}">Mostar Rol</td>
+                                            <td>
+                                                <a th:href="@{/eliminarRelacion(idUsuarioRol=${usuarioRol.idUsuarioRol})}" class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i>[[#{accion.eliminar}]]</a>
+                                            </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>   
+    </body>
+</html>

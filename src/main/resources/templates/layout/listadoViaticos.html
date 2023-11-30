@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listado Viaticos</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <section th:fragment="listadoViaticos">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="card">
+                            <div>
+                                <h4>[[#{viatico.titulo}]]</h4>
+                            </div>
+                            <div>
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>[[#{viatico.fecha}]]</th>
+                                            <th>[[#{viatico.tipo}]]</th>
+                                            <th>[[#{viatico.descripcion}]]</th>
+                                            <th>[[#{viatico.monto}]]</th>
+                                            <th>[[#{viatico.proyecto}]]</th>
+                                            <th>[[#{viatico.usuario}]]</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="viaticos: ${viaticos}">
+                                            <td th:text="${viaticos.fecha}">Mostar fecha </td>
+                                            <td th:text="${viaticos.tipo.nombre}">Mostar tipo</td>
+                                            <td th:text="${viaticos.descripcion}">Mostar descripcion</td>
+                                            <td th:text="${viaticos.monto}">Mostar monto</td>
+                                            <td th:text="${viaticos.proyecto.numeroProyecto}">Mostar numero de proyecto</td>
+                                            <td th:text="${viaticos.usuario.apellido}">Mostar apellido del usuario que hizo la rendicion</td>
+                                            <td sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_COORD')">
+                                                <a th:href="@{/editar/} + ${viaticos.idViatico}"  class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i>[[#{accion.editar}]]</a>
+                                            </td>
+                                            <td sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_COORD')">
+                                                <a th:href="@{/eliminar(idViatico=${viaticos.idViatico})}" class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i>[[#{accion.eliminar}]]</a>
+                                            </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-md-3">
+                        <div class="card text-center bg-danger text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{viatico.gastosTotales}">Gastos Totales</h3>
+                                <h3>
+                                    [[${new java.text.DecimalFormat('$#,##0.00').format(gastoTotal)}]]
+                                </h3>
+                            </div>
+                        </div>
+                        <div class="card text-center bg-success text-white mb-3">
+                            <div class="card-body">
+                                <h3 th:text="#{viatico.totalRendiciones}">Total Rendiciones</h3>
+                                <h3>
+                                    <i class="fas fa-users"></i> [[${totalViaticos}]]
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>   
+    </body>
+</html>

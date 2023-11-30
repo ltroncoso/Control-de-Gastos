@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Listado Viaticos</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <section th:fragment="listadoUsuario">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div>
+                                <h4>[[#{usuarios.titulo}]]</h4>
+                            </div>
+                            <div>
+                                <table class="table table-stryped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>[[#{usuarios.id}]]</th>
+                                            <th>[[#{usuarios.nombre}]]</th>
+                                            <th>[[#{usuarios.apellido}]]</th>
+                                            <th>[[#{usuarios.usuario}]]</th>
+                                            <th>[[#{usuarios.password}]]</th>
+                                            <th>[[#{usuarios.telefono}]]</th>
+                                            <th>[[#{usuarios.email}]]</th>
+                                            <th>[[#{usuarios.direccion}]]</th>
+                                            <th>[[#{usuarios.localidad}]]</th>
+                                            <th>[[#{usuarios.departamento}]]</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr th:each="usuarios: ${usuarios}">
+                                            <td th:text="${usuarios.idUsuario}">Mostar id Usuario </td>
+                                            <td th:text="${usuarios.nombre}">Mostar Nombre</td>
+                                            <td th:text="${usuarios.apellido}">Mostar Apellido </td>
+                                            <td th:text="${usuarios.username}">Mostar Usuario</td>
+                                            <td>****</td>
+                                            <td th:text="${usuarios.contacto.telefono}">Mostar telefono</td>
+                                            <td th:text="${usuarios.contacto.email}">Mostar Email</td>
+                                            <td th:text="${usuarios.domicilio.calle}+' ' +${usuarios.domicilio.noCalle}">Mostar Direccion</td>
+                                            <td th:text="${usuarios.domicilio.localidad}">Mostar localidad</td>
+                                            <td th:text="${usuarios.departamento.nombreDepartamento}">Mostar Area</td>
+                                            <td>
+                                                <a th:href="@{/editarUsuario/} + ${usuarios.idUsuario}"  class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i>[[#{accion.editar}]]</a>
+                                            </td>
+                                            <td>
+                                                <a th:href="@{/eliminarUsuario(idUsuario=${usuarios.idUsuario})}" class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i>[[#{accion.eliminar}]]</a>
+                                            </td>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </section>   
+    </body>
+</html>

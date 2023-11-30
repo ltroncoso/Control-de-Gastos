@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Cartas Proyectos</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+    <section th:fragment="cartasProyectos">
+        <div class="row">
+            <div th:each="proyecto: ${proyectos}" class="col-md-4">
+                <div class="card bg-light mb-4" style="max-width: 24rem;">
+                    <div class="card-header text-center" style="font-size: 1.5rem;" th:text="${proyecto.numeroProyecto}">Numero de Proyecto</div>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${proyecto.descripcion}">Descripcion</h5>
+                        <h5 class="card-title" th:text="${proyecto.cliente.razonSocial}">Cliente</h5>
+                        <h5 class="card-title" style="color: green;"> [[#{proyecto.presupuesto}]]: [[${proyecto.presupuesto}]] </h5>
+                        <h5 class="card-title" style="color: red;"> [[#{proyecto.gastos}]]: [[${proyecto.gasto}]]</h5>
+                    </div>
+                    <div class="card-footer text-center" style="font-size: 1.5rem;">
+                        <a sec:authorize="hasRole('ROLE_ADMIN') or hasRole('ROLE_COORD')" th:href="@{/editarProyecto/} + ${proyecto.idProyecto}"  class="btn btn-secondary">
+                                                    <i class="fas fa-angle-double-right"></i>[[#{accion.editar}]]</a>
+                        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/eliminarProyecto(idProyecto=${proyecto.idProyecto})}" class="btn btn-dark">
+                                                    <i class="fas fa-angle-double-right"></i>[[#{accion.eliminar}]]</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

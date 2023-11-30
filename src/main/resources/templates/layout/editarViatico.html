@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    <head>
+        <title>Editar Viatico</title>
+        <meta charset="UTF-8"/>
+    </head>
+    <body>
+        <section th:fragment="editarViatico">
+            <form th:action="@{/guardar}" th:object="${viatico}"
+                  method="POST" class="was-validated">
+                <input type="hidden" name="idViatico" th:field="*{idViatico}"/>
+                <section th:replace="layout/botonesEditar :: botonesEditar"></section>
+                <div id="details">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4>[[#{accion.editar}]]</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label for="fecha" th:text="#{viatico.fecha}">Fecha</label>
+                                            <input type="date" class="form-control" name="fecha" th:value="${viatico.fecha}" required="true"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tipos" th:text="#{viatico.tipo}">Tipo de viatico</label>
+                                            <select name="tipo" id="tipo">
+                                                <option th:each="tipo : ${tipos}" th:value="${tipo.idTipo}" 
+                                                        th:text="${tipo.nombre}" th:selected="${tipo.idTipo==viatico.tipo.idTipo}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="descripcion" th:text="#{viatico.descripcion}">Descripcion</label>
+                                            <input type="text" class="form-control" name="descripcion" th:value="${viatico.descripcion}" required="true"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="monto" th:text="#{viatico.monto}">Monto</label>
+                                            <input type="text" class="form-control" name="monto" th:value="${viatico.monto}" required="true"></input>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="proyecto" th:text="#{viatico.proyecto}">Proyecto</label>
+                                            <select name="proyecto" id="proyecto">
+                                                <option th:each="proyecto : ${proyectos}" th:value="${proyecto.idProyecto}" 
+                                                        th:text="${proyecto.numeroProyecto}" th:selected="${proyecto.idProyecto==viatico.proyecto.idProyecto}"></option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="usuario" th:value="${viatico.usuario.idUsuario}"></input>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </body>
+</html>

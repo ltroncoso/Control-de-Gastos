@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Agregar Relaciones</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="agregarRelacion">
+            <div id="agregarRelacion" class='modal fade'>
+                <div class='modal-dialog modal-lg'>
+                    <div class='modal-content'>
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title" th:text="#{accion.agregarRelacion}">Agregar Proyecto</h5>
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div> 
+                        <form th:action="@{/guardarRelacion}" th:object="${usuarioRol}"
+                              method="POST" class="was-validated">
+                           
+                            <div class="modal-body">
+                                <label for="usuario" th:text="#{usuarios.usuario}">Usuario</label>
+                                <select name="usuario" id="usuario">
+                                    <option th:each="usuario: ${usuarios}" th:value="${usuario.idUsuario}" th:text="${usuario.username}"></option>
+                                </select>
+                                <div class="modal-body">
+                                    <label for="rol" th:text="#{usuarios.rol}">Rol</label>
+                                    <select name="rol" id="rol">
+                                        <option th:each="rol: ${roles}" th:value="${rol.idRol}" th:text="${rol.rol}"></option>
+                                    </select>
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </body>
+
+</html>

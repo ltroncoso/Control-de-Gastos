@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Agregar Usuario</title>
+        <meta charset="UTF-8"/>
+
+    </head>
+    <body>
+        <section th:fragment="agregarUsuario">
+            <div id="agregarUsuario" class='modal fade'>
+                <div class='modal-dialog modal-lg'>
+                    <div class='modal-content'>
+                        <div class="modal-header bg-info text-white">
+                            <h5 class="modal-title" th:text="#{accion.agregarUsuario}">Agregar Usuario</h5>
+                            <button class="close" data-dismiss="modal">
+                                <span>&times;</span>
+                            </button>
+                        </div> 
+                        <form th:action="@{/guardarUsuario}" th:object="${usuario}"
+                              method="POST" class="was-validated">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nombre" th:text="#{usuarios.nombre}">Nombre</label>
+                                    <input type="text" class="form-control" name="nombre" required="true"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="apellido" th:text="#{usuarios.apellido}">Apellido</label>
+                                    <input type="text" class="form-control" name="apellido" required="true"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="username" th:text="#{usuarios.usuario}" >Usuario</label>
+                                    <input type="text" class="form-control" name="username" required="true" autocomplete="off"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="password" th:text="#{usuarios.password}">Contrasena</label>
+                                    <input type="password" class="form-control" name="password" required="true" autocomplete="off"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telefono" th:text="#{usuarios.telefono}">Telefono</label>
+                                    <input type="tel" id="telefono" class="form-control" name="contacto.telefono" required="true"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email" th:text="#{usuarios.email}">Email</label>
+                                    <input type="email" id="email" class="form-control" name="contacto.email" required="true"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="calle" th:text="#{usuarios.calle}">Calle</label>
+                                    <input type="text" id="calle" class="form-control" name="domicilio.calle" required="true"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="noCalle" th:text="#{usuarios.noCalle}">Numero de Calle</label>
+                                    <input type="text" id="noCalle" class="form-control" name="domicilio.noCalle" required="true"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="localidad" th:text="#{usuarios.localidad}">Localidad</label>
+                                    <input type="text" id="localidad" class="form-control" name="domicilio.localidad" required="true"></input>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="departamento" th:text="#{usuarios.departamento}">Departamento</label>
+                                    <select name="departamento" id="departamento">
+                                        <option th:each="departamento: ${departamentos}" th:value="${departamento.idDepartamento}" th:text="${departamento.nombreDepartamento}"></option>
+                                    </select>
+                                </div>
+
+
+                                <div class="modal-footer">
+                                    <button class="btn btn-primary" type="submit" th:text="#{accion.guardar}">Guardar</button>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section th:fragment="editarUsuario">
+            <div id="editarUsuario">
+                <form th:action="@{/guardarUsuario}" th:object="${usuario}"
+                      method="POST" class="was-validated">
+                    <input type="hidden" name="idUsuario" th:field="*{idUsuario}"/>
+                    <section th:replace="layout/botonesEditar :: botonesEditarUsuario"></section>
+                    <div id="details">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>[[#{accion.editar}]]</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="nombre" th:text="#{usuarios.nombre}">Nombre</label>
+                                                <input type="text" class="form-control" name="nombre" th:value="*{nombre}" required="true"></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="apellido" th:text="#{usuarios.apellido}">Apellido</label>
+                                                <input type="text" class="form-control" name="apellido" th:value="*{apellido}" required="true"></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="username" th:text="#{usuarios.usuario}" >Usuario</label>
+                                                <input type="text" class="form-control" name="username" th:value="*{username}" required="true"></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="password" th:text="#{usuarios.password}">Contrasena</label>
+                                                <input type="password" class="form-control" name="password" 
+                                                       required="true" placeholder="New Password"></input>
+                                            </div>
+                                            
+                                            <input type="hidden" name="contacto.idContacto" th:field="*{contacto.idContacto}"></input>
+                                            
+                                            <div class="form-group">
+                                                <label for="telefono" th:text="#{usuarios.telefono}">Telefono</label>
+                                                <input type="tel" id="telefono" class="form-control" name="contacto.telefono" th:value="*{contacto.telefono}" required="true"></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email" th:text="#{usuarios.email}">Email</label>
+                                                <input type="email" id="email" class="form-control" name="contacto.email" th:value="*{contacto.email}" required="true"></input>
+                                            </div>
+                                            
+                                            <input type="hidden" name="domicilio.idDomicilio" th:field="*{domicilio.idDomicilio}"></input>
+
+                                            <div class="form-group">
+                                                <label for="calle" th:text="#{usuarios.calle}">Calle</label>
+                                                <input type="text" id="calle" class="form-control" name="domicilio.calle" th:value="*{domicilio.calle}"  required="true"></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="noCalle" th:text="#{usuarios.noCalle}">Numero de Calle</label>
+                                                <input type="text" id="noCalle" class="form-control" name="domicilio.noCalle" th:value="*{domicilio.noCalle}" required="true"></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="localidad" th:text="#{usuarios.localidad}">Localidad</label>
+                                                <input type="text" id="localidad" class="form-control" name="domicilio.localidad" th:value="*{domicilio.localidad}" required="true"></input>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="departamento" th:text="#{usuarios.departamento}">Departamento</label>
+                                                <select name="departamento" id="departamento">
+                                                    <option th:each="departamento: ${departamentos}" th:value="${departamento.idDepartamento}" 
+                                                            th:text="${departamento.nombreDepartamento}" th:selected="${departamento.idDepartamento == usuario.departamento.idDepartamento}"></option>
+                                                </select>
+                                            </div>
+                                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </body>
+
+</html>

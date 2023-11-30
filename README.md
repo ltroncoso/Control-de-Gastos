@@ -1,4 +1,4 @@
-# Control-de-Gastos
+# Control de Gastos
 Viáticos es una aplicación desarrollada utilizando Spring Boot con una arquitectura multicapa. En la capa de datos, se emplea JPA (Java Persistence API) junto con Hibernate para la conexión con bases de datos relacionales. La lógica de negocio se implementa en la capa de negocio utilizando el Spring Framework. Para la capa de presentación, se sigue el patrón de diseño MVC (Modelo-Vista-Controlador) mediante el uso de Thymeleaf y plantillas Bootstrap.
 
 Además, la aplicación cuenta con medidas de seguridad implementadas a través de Spring Security. El despliegue de la aplicación se realiza mediante el servidor de aplicaciones Tomcat.
